@@ -37,16 +37,16 @@ describe('PDF Service', () => {
   describe('Test signature', () => {
 
     it('should return single signature pdf buffer', async () => {
-      const encriptedPassword = Crypto.encrypt(PASSWORD1, PUBLIC_KEY);
-      const signedPdf = await service.sign(PDF_FILE, P12_FILE_1, encriptedPassword);
+      const encryptedPassword = Crypto.encrypt(PASSWORD1, PUBLIC_KEY);
+      const signedPdf = await service.sign(PDF_FILE, P12_FILE_1, encryptedPassword);
       expect(signedPdf).to.be.an.instanceof(Buffer);
     });
 
     it('should return multiple signature pdf buffer', async () => {
-      const encriptedPassword = Crypto.encrypt(PASSWORD1, PUBLIC_KEY);
-      const signedPdf = await service.sign(PDF_FILE, P12_FILE_1, encriptedPassword);
-      const encriptedPassword2 = Crypto.encrypt(PASSWORD2, PUBLIC_KEY);
-      const multipleSignedPdf = await service.sign(signedPdf, P12_FILE_2, encriptedPassword2);
+      const encryptedPassword = Crypto.encrypt(PASSWORD1, PUBLIC_KEY);
+      const signedPdf = await service.sign(PDF_FILE, P12_FILE_1, encryptedPassword);
+      const encryptedPassword2 = Crypto.encrypt(PASSWORD2, PUBLIC_KEY);
+      const multipleSignedPdf = await service.sign(signedPdf, P12_FILE_2, encryptedPassword2);
       expect(multipleSignedPdf).to.be.an.instanceof(Buffer);
     });
   });
@@ -54,8 +54,8 @@ describe('PDF Service', () => {
   describe('Test verification signature', () => {
 
     it('should return single signature verified string', async () => {
-      const encriptedPassword = Crypto.encrypt(PASSWORD1, PUBLIC_KEY);
-      const signedPdf = await service.sign(PDF_FILE, P12_FILE_1, encriptedPassword);
+      const encryptedPassword = Crypto.encrypt(PASSWORD1, PUBLIC_KEY);
+      const signedPdf = await service.sign(PDF_FILE, P12_FILE_1, encryptedPassword);
       const verification = await service.verify(signedPdf);
       const match = verification.match(TOTAL_REVISIONS_REGEX);
       const totalSignatures = parseInt(match[1])
@@ -63,10 +63,10 @@ describe('PDF Service', () => {
     });
 
     it('should return multiple signature verified string', async () => {
-      const encriptedPassword = Crypto.encrypt(PASSWORD1, PUBLIC_KEY);
-      const signedPdf = await service.sign(PDF_FILE, P12_FILE_1, encriptedPassword);
-      const encriptedPassword2 = Crypto.encrypt(PASSWORD2, PUBLIC_KEY);
-      const multipleSignedPdf = await service.sign(signedPdf, P12_FILE_2, encriptedPassword2);
+      const encryptedPassword = Crypto.encrypt(PASSWORD1, PUBLIC_KEY);
+      const signedPdf = await service.sign(PDF_FILE, P12_FILE_1, encryptedPassword);
+      const encryptedPassword2 = Crypto.encrypt(PASSWORD2, PUBLIC_KEY);
+      const multipleSignedPdf = await service.sign(signedPdf, P12_FILE_2, encryptedPassword2);
       const verification = await service.verify(multipleSignedPdf);
       const match = verification.match(TOTAL_REVISIONS_REGEX);
       const totalSignatures = parseInt(match[1])

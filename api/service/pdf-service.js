@@ -23,7 +23,7 @@ const sign = async ( pdf, p12, password ) => {
     try {
         spawnSync('mkdir', [ tmpPdfFolder ]);
         
-        const decriptedPassword = Crypto.decrypt(password, PRIVATE_KEY);
+        const decryptedPassword = Crypto.decrypt(password, PRIVATE_KEY);
 
         fs.writeFileSync(pdfFileName, pdf);
         fs.writeFileSync(p12Filename, p12);
@@ -37,7 +37,7 @@ const sign = async ( pdf, p12, password ) => {
             '-ksf',
             p12Filename,
             '-ksp',
-            decriptedPassword,
+            decryptedPassword,
             '-pe',
             'NONE',
             '-pr',
