@@ -1,6 +1,7 @@
 # Description
 
-This solution provides a REST service with express and JSingPDF library. [JSignPDF](https://github.com/kwart/jsignpdf) is a Java project that sign and verify PDF files.
+This solution provides a REST microservice layer with express and JSingPDF library.
+[JSignPDF](https://github.com/kwart/jsignpdf) is a Java project that sign and verify PDF files.
 
 # Requirements
 
@@ -50,9 +51,9 @@ docker-compose up
 
 | Reference | Resource | Http Method |
 | --- | --- | --- |
-| **1** | `/pdf/public-key` | `GET` |
-| **2** | `/pdf/sign` | `POST` |
-| **3** | `/pdf/verify` | `POST` |
+| **1 - Retrieve the public key** | `/pdf/public-key` | `GET` |
+| **2 - Sign PDF Document** | `/pdf/sign` | `POST` |
+| **3 - Verify PDF Document** | `/pdf/verify` | `POST` |
 
 ## 3.1 - Retrieve the public key
 
@@ -79,7 +80,7 @@ This resource sign a PDF Document.
 | --- | --- | --- | --- |
 | **pdf** | `body` | `yes` | PDF stream |
 | **p12** | `body` | `yes` | P12 stream |
-| **password** | `body` | `yes` | Encrypted password |
+| **password** | `body` | `yes` | Encrypted P12 password |
 | **filename** | `body` | `no` | PDF Filename for the response. **If not passed the file will call `signed_document`** |
 
 ### Response
