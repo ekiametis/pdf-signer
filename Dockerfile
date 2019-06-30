@@ -17,6 +17,7 @@ COPY conf "$APP"/conf
 COPY jsignpdf "$APP"/jsignpdf
 COPY tmp "$APP"/tmp
 COPY package.json "$APP"/
+COPY package-lock.json "$APP"/
 COPY app.js "$APP"/
 
 # Install dependencies and list sources

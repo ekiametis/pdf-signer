@@ -45,3 +45,63 @@ docker-compose up
 - `PORT` 
     - **OPTIONAL | DEFAULT = 8080**
     - Node server port.
+
+# 3. REST Services
+
+| Reference | Resource | Http Method |
+| --- | --- | --- |
+| **1** | `/pdf/public-key` | `GET` |
+| **2** | `/pdf/sign` | `POST` |
+| **3** | `/pdf/verify` | `POST` |
+
+## 3.1 - Retrieve the public key
+
+This resource retrieve the public key to encrypt keystore password.
+
+### Parameters
+
+You don't need to pass any parameter.
+
+### Response
+
+| Http Status | Content-Type | Response |
+| --- | --- | --- |
+| **200** | `text/plain` | The public key text |
+| **500** | `text/plain` | Error message |
+
+## 3.2 - Sign PDF Document
+
+This resource sign a PDF Document.
+
+### Parameters
+
+| Parameter | Type | Required | Response |
+| --- | --- | --- | --- |
+| **pdf** | `body` | `yes` | PDF stream |
+| **p12** | `body` | `yes` | P12 stream |
+| **password** | `body` | `yes` | Encrypted password |
+| **filename** | `body` | `no` | PDF Filename for the response. **If not passed the file will call `signed_document`** |
+
+### Response
+
+| Http Status | Content-Type | Response |
+| --- | --- | --- |
+| **200** | `application/pdf` | PDF signed |
+| **500** | `text/plain` | Error message |
+
+## 3.3 - Verify PDF Document
+
+This resource verify a Signed PDF Document.
+
+### Parameters
+
+| Parameter | Type | Required | Response |
+| --- | --- | --- | --- |
+| **pdf** | `body` | `yes` | Signed PDF stream |
+
+### Response
+
+| Http Status | Content-Type | Response |
+| --- | --- | --- |
+| **200** | `text/plain` | String containing the verified resolution |
+| **500** | `text/plain` | Error message |
