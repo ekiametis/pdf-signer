@@ -69,6 +69,8 @@ const sign = async ( pdf, p12, password ) => {
 
 const verify = async (pdf) => {
 
+    RequestValidator.isNotNull('pdf', pdf);
+    
     const tmpPdfFolder = path.join(__dirname, '../../', 'tmp', uuidv4());
     const pdfFileName = path.join(tmpPdfFolder, 'demo.pdf');
 
