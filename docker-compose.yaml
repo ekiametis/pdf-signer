@@ -2,12 +2,12 @@ version: '3'
 
 services:
     assinador-pdf:
-        image: teste-assinador:latest
+        image: ekiametis/pdf-signer:latest
         ports:
             - "4000:8080"
         volumes:
           - './keys:/run/secrets'
         environment:
             PORT: 8080
-            PUBLIC_KEY_FILE_PATH: '/run/secrets/public.pem'
-            PRIVATE_KEY_FILE_PATH: '/run/secrets/private.key'
+            PUBLIC_KEY_FILE_PATH: '/run/secrets/public.pub'
+            PRIVATE_KEY_FILE_PATH: '/run/secrets/private.pem'
