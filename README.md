@@ -87,7 +87,7 @@ This resource sign a PDF Document.
 
 | Http Status | Content-Type | Response |
 | --- | --- | --- |
-| **200** | `application/pdf` | PDF signed |
+| **200** | `application/pdf` | Signed PDF |
 | **500** | `text/plain` | Error message |
 
 ## 3.3 - Verify PDF Document
